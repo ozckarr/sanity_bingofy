@@ -1,0 +1,22 @@
+@import "./header-style";
+
+$color: rgb(12, 59, 71);
+
+a {
+  color: $color;
+  margin-right: 0.5em;
+  &:first-child {
+    color: green;
+  }
+}
+
+.postList {
+  a span {
+    display: flex;
+    background-color: white;
+    flex-direction: row;
+  }
+  img {
+    height: 3em;
+  }
+}
