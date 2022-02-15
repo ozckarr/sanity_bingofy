@@ -10,8 +10,8 @@ export default function Navbar() {
             Hem
           </NavLink>
           <NavLink to="/post">Posts</NavLink>
-          <NavLink to="/project">Projekt</NavLink>
-          <NavLink to="/about">About</NavLink>
+          {/*<NavLink to="/project">Projekt</NavLink>
+          <NavLink to="/about">About</NavLink>*/}
         </nav>
       </div>
     </header>
