@@ -1,54 +1,59 @@
 import React, { useEffect, useState } from "react";
 import sanityClient from "../client";
-import { useParams } from "react-router-dom";
-//import imageUrlBuilder from "@sanity/image-url";
-import BlockContent from "@sanity/block-content-to-react";
+import { useParams, Link } from "react-router-dom";
+
+import BingoBrick from "./BingoBrick";
+
 import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+
 import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
-/*
-const builder = imageUrlBuilder(sanityClient);
-function urlFor(source) {
-  return builder.image(source);
-}
-*/
 
 export default function BingoGame() {
-  const [singlePost, setSinglePost] = useState(null);
+  const [bingo, setBingo] = useState(null);
   const { slug } = useParams();
 
   useEffect(() => {
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
-        title,
-        _id,
-        slug,
-        mainImage{
-          asset->{
-            _id,
-              url
-            }
-          },
-          body,
+          title,
+          _id,
+          slug,
+          brick
         }`
       )
-      .then((data) => setSinglePost(data[0]))
+      .then((data) => setBingo(data[0]))
       .catch(console.error);
   }, [slug]);
 
-  if (!singlePost) return <div>Loading...</div>;
-  return (
-    <div>
-      <KeyboardReturnIcon />
-      <Typography variant={"h3"} className="title-hompage">
-        {singlePost.title}
-      </Typography>
+  if (!bingo) return <div>Loading...</div>;
 
-      <BlockContent
-        blocks={singlePost.body}
-        projectId={process.env.REACT_APP_PROJECTID}
-        dataset="production"
-      />
-    </div>
+  return (
+    <Container maxWidth="sm">
+      <Box sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}>
+        <Link to={"/"}>
+          <Button
+            variant="outlined"
+            size="small"
+            sx={{ marginBottom: "0.2em", marginRight: "1em" }}
+          >
+            <KeyboardReturnIcon />
+          </Button>
+        </Link>
+
+        <Typography variant={"h5"} className="title-hompage">
+          {bingo.title}
+        </Typography>
+      </Box>
+      <div className="bingo-container">
+        {bingo.brick &&
+          bingo.brick.map((brick, index) => (
+            <BingoBrick brick={brick} key={index} />
+          ))}
+      </div>
+    </Container>
   );
 }

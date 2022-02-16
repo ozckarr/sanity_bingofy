@@ -1,0 +1,64 @@
+.bingo-container {
+  display: flex;
+  flex-flow: row wrap;
+  background-color: antiquewhite;
+  border: 2px solid black;
+  .bingo-brick-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+  }
+  .bingo-brick {
+    width: 20%;
+    outline: 1px solid black;
+    display: inline-block;
+
+    .bingo-brick-text {
+      margin: 0.5em;
+      text-align: center;
+      height: 0;
+      padding-bottom: calc(100% - 1em);
+      word-break: break-all;
+
+      overflow: hidden;
+    }
+    .bingo-brick-img-fill {
+      height: 0;
+      padding-bottom: 100%;
+    }
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .bingo-container {
+    .bingo-brick {
+      .bingo-brick-text {
+        font-size: 12px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 500px) {
+  .css-cuefkz-MuiContainer-root {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  .bingo-container {
+    .bingo-brick {
+      .bingo-brick-text {
+        font-size: 10px;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 338px) {
+  .bingo-container {
+    .bingo-brick {
+      .bingo-brick-text {
+        font-size: 9px;
+      }
+    }
+  }
+}

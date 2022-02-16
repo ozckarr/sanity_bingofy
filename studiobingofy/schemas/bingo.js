@@ -32,9 +32,9 @@ export default {
           fields: [
             {
               title: "Bricka",
-              name: "brick",
+              name: "title",
               type: "string",
-              maxLength: 40,
+              maxLength: 30,
             },
             {
               name: "image",
