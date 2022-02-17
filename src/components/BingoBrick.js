@@ -10,13 +10,14 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-function BingoBrick({ brick }) {
+function BingoBrick({ brick, selectBrick }) {
   return (
     <>
       {brick.image ? (
         <div
           className="bingo-brick bingo-brick-img"
           style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
+          onClick={() => selectBrick(brick)}
         >
           <div className="bingo-brick-img-fill"></div>
         </div>
