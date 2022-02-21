@@ -1,30 +1,46 @@
 .bingo-container {
   display: flex;
   flex-flow: row wrap;
-  background-color: antiquewhite;
-  border: 2px solid black;
+  border: 1px solid black;
   .bingo-brick-img {
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
   }
+  .bingo-brick-text-checked {
+    background-image: url("../images/cross-text.png");
+    background-size: cover;
+  }
   .bingo-brick {
     width: 20%;
-    outline: 1px solid black;
+    border: 1px solid black;
     display: inline-block;
+    box-sizing: border-box;
 
-    .bingo-brick-text {
+    .bingo-brick-text-container {
       margin: 0.5em;
-      text-align: center;
       height: 0;
       padding-bottom: calc(100% - 1em);
       word-break: break-all;
-
       overflow: hidden;
+      position: relative;
+      .bingo-brick-text {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: fit-content;
+      }
     }
     .bingo-brick-img-fill {
       height: 0;
       padding-bottom: 100%;
+    }
+    .bingo-brick-img-checked {
+      background-image: url("../images/cross.png");
+      background-size: cover;
+      opacity: 70%;
     }
   }
 }

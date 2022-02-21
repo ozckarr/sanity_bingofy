@@ -14,8 +14,10 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 export default function BingoGame() {
   const [bingo, setBingo] = useState(null);
   const [selectedBrick, setSelectedBrick] = useState(null);
-  //const [localBingoData, setLocalBingoData] = useState(null);
-  const [brickOrder, setBrickOrder] = useState([]);
+  const [localBingoData, setLocalBingoData] = useState({
+    order: [],
+    checkedList: [],
+  });
   const { slug } = useParams();
 
   useEffect(() => {
@@ -37,6 +39,34 @@ export default function BingoGame() {
       let localData = JSON.parse(localStorage.getItem(bingo._id));
       if (localData === null) {
         let order = [];
+        //Array(25).fill(true)
+        const checkedList = [
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+          true,
+          false,
+          false,
+          false,
+          false,
+        ];
         for (let i = 0; i < bingo.brick.length; i++) {
           order.push(i);
         }
@@ -55,10 +85,10 @@ export default function BingoGame() {
             order[currentIndex],
           ];
         }
-        localStorage.setItem(bingo._id, JSON.stringify(order));
-        setBrickOrder(order);
+        localStorage.setItem(bingo._id, JSON.stringify({ order, checkedList }));
+        setLocalBingoData({ order, checkedList });
       } else {
-        setBrickOrder(localData);
+        setLocalBingoData(localData);
       }
     }
   }, [bingo]);
@@ -71,7 +101,7 @@ export default function BingoGame() {
     if (bingo.brick !== null) {
       let reorderdBricks = Array(25).fill(0);
       for (let i = 0; i < 25; i++) {
-        reorderdBricks[brickOrder[i]] = bingo.brick[i];
+        reorderdBricks[localBingoData.order[i]] = bingo.brick[i];
       }
       return reorderdBricks;
     }
@@ -98,8 +128,14 @@ export default function BingoGame() {
       </Box>
       <div className="bingo-container">
         {bingo.brick &&
+          localBingoData.checkedList !== [] &&
           aNewBrickOrder().map((brick, index) => (
-            <BingoBrick brick={brick} key={index} selectBrick={selectBrick} />
+            <BingoBrick
+              brick={brick}
+              key={index}
+              selectBrick={selectBrick}
+              checked={localBingoData.checkedList[index]}
+            />
           ))}
       </div>
       <BingoBrickInfo brick={selectedBrick} />

@@ -6,8 +6,7 @@
   -webkit-box-direction: normal;
       -ms-flex-flow: row wrap;
           flex-flow: row wrap;
-  background-color: antiquewhite;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
 .bingo-container .bingo-brick-img {
@@ -16,24 +15,49 @@
   background-position: center;
 }
 
-.bingo-container .bingo-brick {
-  width: 20%;
-  outline: 1px solid black;
-  display: inline-block;
+.bingo-container .bingo-brick-text-checked {
+  background-image: url("../images/cross-text.png");
+  background-size: cover;
 }
 
-.bingo-container .bingo-brick .bingo-brick-text {
+.bingo-container .bingo-brick {
+  width: 20%;
+  border: 1px solid black;
+  display: inline-block;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.bingo-container .bingo-brick .bingo-brick-text-container {
   margin: 0.5em;
-  text-align: center;
   height: 0;
   padding-bottom: calc(100% - 1em);
   word-break: break-all;
   overflow: hidden;
+  position: relative;
+}
+
+.bingo-container .bingo-brick .bingo-brick-text-container .bingo-brick-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  text-align: center;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 
 .bingo-container .bingo-brick .bingo-brick-img-fill {
   height: 0;
   padding-bottom: 100%;
+}
+
+.bingo-container .bingo-brick .bingo-brick-img-checked {
+  background-image: url("../images/cross.png");
+  background-size: cover;
+  opacity: 70%;
 }
 
 @media only screen and (max-width: 600px) {

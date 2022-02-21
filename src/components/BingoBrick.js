@@ -3,14 +3,13 @@ import sanityClient from "../client";
 
 import Typography from "@mui/material/Typography";
 
-//import BlockContent from "@sanity/block-content-to-react";
 import imageUrlBuilder from "@sanity/image-url";
 const builder = imageUrlBuilder(sanityClient);
 function urlFor(source) {
   return builder.image(source);
 }
 
-function BingoBrick({ brick, selectBrick }) {
+function BingoBrick({ brick, selectBrick, checked }) {
   return (
     <>
       {brick.image ? (
@@ -19,11 +18,17 @@ function BingoBrick({ brick, selectBrick }) {
           style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
           onClick={() => selectBrick(brick)}
         >
-          <div className="bingo-brick-img-fill"></div>
+          {checked ? (
+            <div className="bingo-brick-img-fill bingo-brick-img-checked"></div>
+          ) : (
+            <div className="bingo-brick-img-fill"></div>
+          )}
         </div>
       ) : (
-        <div className="bingo-brick">
-          <Typography className="bingo-brick-text">{brick.title}</Typography>
+        <div className={`bingo-brick ${checked && "bingo-brick-text-checked"}`}>
+          <div className="bingo-brick-text-container">
+            <Typography className="bingo-brick-text">{brick.title}</Typography>
+          </div>
         </div>
       )}
     </>
