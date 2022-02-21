@@ -14,6 +14,7 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 export default function BingoGame() {
   const [bingo, setBingo] = useState(null);
   const [selectedBrick, setSelectedBrick] = useState(null);
+  //const [localBingoData, setLocalBingoData] = useState(null);
   const [brickOrder, setBrickOrder] = useState([]);
   const { slug } = useParams();
 
@@ -33,26 +34,32 @@ export default function BingoGame() {
 
   useEffect(() => {
     if (bingo !== null) {
-      let order = [];
-      for (let i = 0; i < bingo.brick.length; i++) {
-        order.push(i);
-      }
-      let currentIndex = order.length,
-        randomIndex;
+      let localData = JSON.parse(localStorage.getItem(bingo._id));
+      if (localData === null) {
+        let order = [];
+        for (let i = 0; i < bingo.brick.length; i++) {
+          order.push(i);
+        }
+        let currentIndex = order.length,
+          randomIndex;
 
-      // While there remain elements to shuffle...
-      while (currentIndex !== 0) {
-        // Pick a remaining element...
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
+        // While there remain elements to shuffle...
+        while (currentIndex !== 0) {
+          // Pick a remaining element...
+          randomIndex = Math.floor(Math.random() * currentIndex);
+          currentIndex--;
 
-        // And swap it with the current element.
-        [order[currentIndex], order[randomIndex]] = [
-          order[randomIndex],
-          order[currentIndex],
-        ];
+          // And swap it with the current element.
+          [order[currentIndex], order[randomIndex]] = [
+            order[randomIndex],
+            order[currentIndex],
+          ];
+        }
+        localStorage.setItem(bingo._id, JSON.stringify(order));
+        setBrickOrder(order);
+      } else {
+        setBrickOrder(localData);
       }
-      setBrickOrder(order);
     }
   }, [bingo]);
 

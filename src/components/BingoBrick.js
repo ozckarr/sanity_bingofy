@@ -31,8 +31,3 @@ function BingoBrick({ brick, selectBrick }) {
 }
 
 export default BingoBrick;
-/*<BlockContent
-        blocks={bingo.body}
-        projectId={process.env.REACT_APP_PROJECTID}
-        dataset="production"
-      />*/
