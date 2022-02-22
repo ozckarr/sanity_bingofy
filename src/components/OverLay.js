@@ -4,6 +4,7 @@ import sanityClient from "../client";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
 
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 
@@ -44,8 +45,10 @@ export default function OverLay({
             fontSize="medium"
           />
           {youHaveBingo ? (
-            <Box>
-              <p>Bingo...</p>
+            <Box className="bingo-overlay-win">
+              <Typography variant="h3" color="primary">
+                Bingo...
+              </Typography>
               <Button variant="outlined" onClick={handleContinuePlaying}>
                 Fortsätt Spela
               </Button>

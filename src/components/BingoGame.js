@@ -82,7 +82,6 @@ export default function BingoGame() {
     localData.checkedList[index] = !localData.checkedList[index];
     localStorage.setItem(bingo._id, JSON.stringify(localData));
     setLocalBingoData(localData);
-
     setYouHaveBingo(checkForBingo(localData.checkedList));
   };
 

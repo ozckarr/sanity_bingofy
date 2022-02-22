@@ -173,6 +173,24 @@
   background-repeat: no-repeat;
 }
 
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-win {
+  margin: 2em;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  height: 0;
+  padding-bottom: calc(100% - 4em);
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-win button {
+  margin-top: 0.5em;
+}
+
 @media only screen and (max-width: 600px) {
   .bingo-container .bingo-brick .bingo-brick-text {
     font-size: 12px;
