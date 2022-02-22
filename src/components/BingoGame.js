@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import sanityClient from "../client";
 import { useParams, Link } from "react-router-dom";
 
+import checkForBingo from "../modules/checkForBingo";
+import randomOrder from "../modules/randomOrder";
+
 import BingoBrick from "./BingoBrick";
 import BingoBrickInfo from "./BingoBrickInfo";
 import OverLay from "./OverLay";
@@ -14,15 +17,21 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 
 export default function BingoGame() {
   const [bingo, setBingo] = useState(null);
+  const [youHaveBingo, setYouHaveBingo] = useState(false);
+  const [continuePlaying, setContinuePlaying] = useState(false);
+
   const [selectedBrick, setSelectedBrick] = useState(null);
   const [selectedBrickIndex, setSelectedBrickIndex] = useState(null);
+  const [viewOverlay, setViewOverlay] = useState(false);
 
   const [localBingoData, setLocalBingoData] = useState({
     order: [],
     checkedList: [],
   });
+
   const { slug } = useParams();
 
+  // Fetch Bingo Data
   useEffect(() => {
     sanityClient
       .fetch(
@@ -37,30 +46,14 @@ export default function BingoGame() {
       .catch(console.error);
   }, [slug]);
 
+  // After fetch randomize the game or use the old structure
   useEffect(() => {
     if (bingo !== null) {
       let localData = JSON.parse(localStorage.getItem(bingo._id));
       if (localData === null) {
-        let order = [];
         const checkedList = Array(25).fill(false);
-        for (let i = 0; i < bingo.brick.length; i++) {
-          order.push(i);
-        }
-        let currentIndex = order.length,
-          randomIndex;
+        const order = randomOrder(bingo);
 
-        // While there remain elements to shuffle...
-        while (currentIndex !== 0) {
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex--;
-
-          // And swap it with the current element.
-          [order[currentIndex], order[randomIndex]] = [
-            order[randomIndex],
-            order[currentIndex],
-          ];
-        }
         localStorage.setItem(bingo._id, JSON.stringify({ order, checkedList }));
         setLocalBingoData({ order, checkedList });
       } else {
@@ -89,15 +82,45 @@ export default function BingoGame() {
     localData.checkedList[index] = !localData.checkedList[index];
     localStorage.setItem(bingo._id, JSON.stringify(localData));
     setLocalBingoData(localData);
+
+    setYouHaveBingo(checkForBingo(localData.checkedList));
+  };
+
+  const restart = () => {
+    setYouHaveBingo(false);
+    setContinuePlaying(false);
+    setSelectedBrick(null);
+    setSelectedBrickIndex(null);
+    setViewOverlay(false);
+    setLocalBingoData({
+      order: [],
+      checkedList: [],
+    });
+
+    const order = randomOrder(bingo);
+    const checkedList = Array(25).fill(false);
+    localStorage.setItem(bingo._id, JSON.stringify({ order, checkedList }));
+    setLocalBingoData({ order, checkedList });
   };
 
   if (!bingo) return <div>Loading...</div>;
 
   return (
     <>
-      <OverLay />
+      {(viewOverlay || (youHaveBingo && !continuePlaying)) && (
+        <OverLay
+          selectedBrick={selectedBrick}
+          setViewOverlay={setViewOverlay}
+          youHaveBingo={youHaveBingo}
+          setContinuePlaying={setContinuePlaying}
+          restart={restart}
+        />
+      )}
       <Container maxWidth="sm">
-        <Box sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}>
+        <Box
+          sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}
+          className="bingo-game-header"
+        >
           <Link to={"/"} onClick={() => localStorage.removeItem(bingo._id)}>
             <Button
               variant="outlined"
@@ -108,7 +131,11 @@ export default function BingoGame() {
             </Button>
           </Link>
 
-          <Typography variant={"h5"} className="title-hompage">
+          <Typography
+            variant={"h5"}
+            className="bingo-game-title"
+            color="primary"
+          >
             {bingo.title}
           </Typography>
         </Box>
@@ -132,6 +159,8 @@ export default function BingoGame() {
           brick={selectedBrick}
           checkBox={checkBox}
           selectedBrickIndex={selectedBrickIndex}
+          setViewOverlay={setViewOverlay}
+          checkedList={localBingoData.checkedList}
         />
       </Container>
     </>

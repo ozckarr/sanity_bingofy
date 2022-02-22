@@ -3,10 +3,10 @@ import sanityClient from "../client";
 
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import Box from "@mui/material/Box";
 
-//import UnpublishedRoundedIcon from "@mui/icons-material/UnpublishedRounded";
+import UnpublishedRoundedIcon from "@mui/icons-material/UnpublishedRounded";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
-//import CreateRoundedIcon from "@mui/icons-material/CreateRounded";
 import ZoomInIcon from "@mui/icons-material/ZoomIn";
 
 import imageUrlBuilder from "@sanity/image-url";
@@ -16,7 +16,13 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-function BingoBrickInfo({ brick, selectedBrickIndex, checkBox }) {
+function BingoBrickInfo({
+  brick,
+  selectedBrickIndex,
+  checkBox,
+  setViewOverlay,
+  checkedList,
+}) {
   return (
     <>
       {brick === null ? (
@@ -26,7 +32,14 @@ function BingoBrickInfo({ brick, selectedBrickIndex, checkBox }) {
       ) : (
         <div className="brick-info">
           <div className="brick-text-info">
-            <Typography variant={"h5"}>{brick.title}</Typography>
+            <Typography
+              variant={"h5"}
+              color="primary"
+              className="brick-text-title"
+            >
+              {brick.title}
+            </Typography>
+            <Box className="brick-text-underline"></Box>
             {brick.description && <Typography>{brick.description}</Typography>}
           </div>
 
@@ -35,6 +48,7 @@ function BingoBrickInfo({ brick, selectedBrickIndex, checkBox }) {
               <div
                 className="info-zoom-image"
                 style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
+                onClick={() => setViewOverlay(true)}
               >
                 <ZoomInIcon
                   className="info-zoom-icon"
@@ -48,7 +62,11 @@ function BingoBrickInfo({ brick, selectedBrickIndex, checkBox }) {
               size="small"
               onClick={() => checkBox(selectedBrickIndex)}
             >
-              <CheckCircleRoundedIcon fontSize="large" />
+              {checkedList[selectedBrickIndex] ? (
+                <UnpublishedRoundedIcon fontSize="large" color="error" />
+              ) : (
+                <CheckCircleRoundedIcon fontSize="large" />
+              )}
             </Button>
           </div>
         </div>

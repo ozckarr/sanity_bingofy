@@ -1,3 +1,11 @@
+.bingo-game-header {
+  .bingo-game-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
 .bingo-container {
   display: flex;
   flex-flow: row wrap;
@@ -6,6 +14,7 @@
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+    width: 100%;
   }
   .bingo-brick-text-checked {
     background-image: url("../images/cross-text.png");
@@ -20,9 +29,9 @@
       border: 3px solid #1976d2;
     }
     .bingo-brick-text-container {
-      margin: 0.5em;
+      margin: 0.2em;
       height: 0;
-      padding-bottom: calc(100% - 1em);
+      padding-bottom: calc(100% - 0.4em);
       word-break: break-all;
       overflow: hidden;
       position: relative;
@@ -52,6 +61,21 @@
   display: flex;
   margin: 0.5em 0em;
   justify-content: space-between;
+  .brick-text-title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brick-text-info {
+    margin-right: 0.5em;
+    width: calc(100% - 72px);
+    .brick-text-underline {
+      height: 1px;
+      width: 100%;
+      background-color: #1976d2;
+      margin-bottom: 0.4em;
+    }
+  }
   .info-interact {
     .info-zoom-image {
       border-radius: 4px;
@@ -109,6 +133,17 @@
         position: absolute;
         right: 0.2em;
         top: 0.2em;
+        background-color: white;
+        border-radius: 1em;
+      }
+      .bingo-overlay-image {
+        height: 0;
+        width: calc(100% - 2em);
+        margin: 1em;
+        padding-bottom: calc(100% - 2em);
+        background-size: contain;
+        background-position: center;
+        background-repeat: no-repeat;
       }
     }
   }

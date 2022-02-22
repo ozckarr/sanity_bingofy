@@ -13,3 +13,6 @@ write in terminal 2
 
 To deploy. tutorial here: Or rewind to doublecheck anything.
 `https://youtu.be/NO7_jgzVgbc?t=7170`
+
+TODO
+Handle more/less than 25 boxes

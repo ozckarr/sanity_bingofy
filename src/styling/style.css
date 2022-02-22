@@ -1,3 +1,9 @@
+.bingo-game-header .bingo-game-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .bingo-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -13,6 +19,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  width: 100%;
 }
 
 .bingo-container .bingo-brick-text-checked {
@@ -33,9 +40,9 @@
 }
 
 .bingo-container .bingo-brick .bingo-brick-text-container {
-  margin: 0.5em;
+  margin: 0.2em;
   height: 0;
-  padding-bottom: calc(100% - 1em);
+  padding-bottom: calc(100% - 0.4em);
   word-break: break-all;
   overflow: hidden;
   position: relative;
@@ -73,6 +80,24 @@
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+}
+
+.brick-info .brick-text-title {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.brick-info .brick-text-info {
+  margin-right: 0.5em;
+  width: calc(100% - 72px);
+}
+
+.brick-info .brick-text-info .brick-text-underline {
+  height: 1px;
+  width: 100%;
+  background-color: #1976d2;
+  margin-bottom: 0.4em;
 }
 
 .brick-info .info-interact .info-zoom-image {
@@ -134,6 +159,18 @@
   position: absolute;
   right: 0.2em;
   top: 0.2em;
+  background-color: white;
+  border-radius: 1em;
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-image {
+  height: 0;
+  width: calc(100% - 2em);
+  margin: 1em;
+  padding-bottom: calc(100% - 2em);
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @media only screen and (max-width: 600px) {
