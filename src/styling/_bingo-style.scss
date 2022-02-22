@@ -43,14 +43,15 @@
       background-image: url("../images/cross.png");
       background-size: cover;
       opacity: 70%;
+      z-index: 0;
     }
   }
 }
+
 .brick-info {
   display: flex;
   margin: 0.5em 0em;
   justify-content: space-between;
-
   .info-interact {
     .info-zoom-image {
       border-radius: 4px;
@@ -80,12 +81,50 @@
   }
 }
 
+.bingo-overlay-container {
+  position: absolute;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgba(0, 0, 0, 0.5);
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  .bingo-overlay {
+    position: absolute;
+    left: 50%;
+    top: 4em;
+    transform: translateX(-50%);
+    display: inline-block;
+    padding: 0 3em;
+    box-sizing: border-box;
+    .bingo-overlay-content {
+      height: 0;
+      padding-bottom: 100%;
+      background-color: white;
+      border: solid 3px #1976d2;
+      border-radius: 1em;
+      position: relative;
+      .bingo-overlay-close {
+        position: absolute;
+        right: 0.2em;
+        top: 0.2em;
+      }
+    }
+  }
+}
+
 @media only screen and (max-width: 600px) {
   .bingo-container {
     .bingo-brick {
       .bingo-brick-text {
         font-size: 12px;
       }
+    }
+  }
+  .bingo-overlay-container {
+    .bingo-overlay {
+      padding: 0 2em;
     }
   }
 }
@@ -104,6 +143,11 @@
   }
   .brick-info {
     margin: 0.5em;
+  }
+  .bingo-overlay-container {
+    .bingo-overlay {
+      padding: 0 1em;
+    }
   }
 }
 

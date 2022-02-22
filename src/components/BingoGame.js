@@ -4,6 +4,7 @@ import { useParams, Link } from "react-router-dom";
 
 import BingoBrick from "./BingoBrick";
 import BingoBrickInfo from "./BingoBrickInfo";
+import OverLay from "./OverLay";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -93,43 +94,46 @@ export default function BingoGame() {
   if (!bingo) return <div>Loading...</div>;
 
   return (
-    <Container maxWidth="sm">
-      <Box sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}>
-        <Link to={"/"} onClick={() => localStorage.removeItem(bingo._id)}>
-          <Button
-            variant="outlined"
-            size="small"
-            sx={{ marginBottom: "0.2em", marginRight: "1em" }}
-          >
-            <KeyboardReturnIcon />
-          </Button>
-        </Link>
+    <>
+      <OverLay />
+      <Container maxWidth="sm">
+        <Box sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}>
+          <Link to={"/"} onClick={() => localStorage.removeItem(bingo._id)}>
+            <Button
+              variant="outlined"
+              size="small"
+              sx={{ marginBottom: "0.2em", marginRight: "1em" }}
+            >
+              <KeyboardReturnIcon />
+            </Button>
+          </Link>
 
-        <Typography variant={"h5"} className="title-hompage">
-          {bingo.title}
-        </Typography>
-      </Box>
+          <Typography variant={"h5"} className="title-hompage">
+            {bingo.title}
+          </Typography>
+        </Box>
 
-      <div className="bingo-container">
-        {bingo.brick &&
-          localBingoData.checkedList !== [] &&
-          aNewBrickOrder().map((brick, index) => (
-            <BingoBrick
-              brick={brick}
-              key={index}
-              checkBox={checkBox}
-              selectBrick={selectBrick}
-              checked={localBingoData.checkedList[index]}
-              index={index}
-              selectedBrickIndex={selectedBrickIndex}
-            />
-          ))}
-      </div>
-      <BingoBrickInfo
-        brick={selectedBrick}
-        checkBox={checkBox}
-        selectedBrickIndex={selectedBrickIndex}
-      />
-    </Container>
+        <div className="bingo-container">
+          {bingo.brick &&
+            localBingoData.checkedList !== [] &&
+            aNewBrickOrder().map((brick, index) => (
+              <BingoBrick
+                brick={brick}
+                key={index}
+                checkBox={checkBox}
+                selectBrick={selectBrick}
+                checked={localBingoData.checkedList[index]}
+                index={index}
+                selectedBrickIndex={selectedBrickIndex}
+              />
+            ))}
+        </div>
+        <BingoBrickInfo
+          brick={selectedBrick}
+          checkBox={checkBox}
+          selectedBrickIndex={selectedBrickIndex}
+        />
+      </Container>
+    </>
   );
 }
