@@ -14,6 +14,8 @@ import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
 export default function BingoGame() {
   const [bingo, setBingo] = useState(null);
   const [selectedBrick, setSelectedBrick] = useState(null);
+  const [selectedBrickIndex, setSelectedBrickIndex] = useState(null);
+
   const [localBingoData, setLocalBingoData] = useState({
     order: [],
     checkedList: [],
@@ -39,34 +41,7 @@ export default function BingoGame() {
       let localData = JSON.parse(localStorage.getItem(bingo._id));
       if (localData === null) {
         let order = [];
-        //Array(25).fill(true)
-        const checkedList = [
-          true,
-          false,
-          false,
-          false,
-          false,
-          true,
-          false,
-          false,
-          false,
-          false,
-          true,
-          false,
-          false,
-          false,
-          false,
-          true,
-          false,
-          false,
-          false,
-          false,
-          true,
-          false,
-          false,
-          false,
-          false,
-        ];
+        const checkedList = Array(25).fill(false);
         for (let i = 0; i < bingo.brick.length; i++) {
           order.push(i);
         }
@@ -93,8 +68,9 @@ export default function BingoGame() {
     }
   }, [bingo]);
 
-  const selectBrick = (brickData) => {
+  const selectBrick = (brickData, index) => {
     setSelectedBrick(brickData);
+    setSelectedBrickIndex(index);
   };
 
   const aNewBrickOrder = () => {
@@ -135,6 +111,8 @@ export default function BingoGame() {
               key={index}
               selectBrick={selectBrick}
               checked={localBingoData.checkedList[index]}
+              index={index}
+              selectedBrickIndex={selectedBrickIndex}
             />
           ))}
       </div>

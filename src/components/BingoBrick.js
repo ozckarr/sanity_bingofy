@@ -9,14 +9,22 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-function BingoBrick({ brick, selectBrick, checked }) {
+function BingoBrick({
+  brick,
+  selectBrick,
+  checked,
+  index,
+  selectedBrickIndex,
+}) {
   return (
     <>
       {brick.image ? (
         <div
-          className="bingo-brick bingo-brick-img"
+          className={`bingo-brick bingo-brick-img ${
+            index === selectedBrickIndex && "bingo-brick-selected"
+          }`}
           style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
-          onClick={() => selectBrick(brick)}
+          onClick={() => selectBrick(brick, index)}
         >
           {checked ? (
             <div className="bingo-brick-img-fill bingo-brick-img-checked"></div>
@@ -25,8 +33,17 @@ function BingoBrick({ brick, selectBrick, checked }) {
           )}
         </div>
       ) : (
-        <div className={`bingo-brick ${checked && "bingo-brick-text-checked"}`}>
-          <div className="bingo-brick-text-container">
+        <div
+          className={`bingo-brick ${
+            index === selectedBrickIndex && "bingo-brick-selected"
+          }`}
+          onClick={() => selectBrick(brick, index)}
+        >
+          <div
+            className={`bingo-brick-text-container ${
+              index === selectedBrickIndex && "bingo-brick-selected"
+            }`}
+          >
             <Typography className="bingo-brick-text">{brick.title}</Typography>
           </div>
         </div>

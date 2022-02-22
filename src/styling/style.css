@@ -28,6 +28,10 @@
           box-sizing: border-box;
 }
 
+.bingo-container .bingo-brick.bingo-brick-selected {
+  border: 3px solid #1976d2;
+}
+
 .bingo-container .bingo-brick .bingo-brick-text-container {
   margin: 0.5em;
   height: 0;
@@ -60,6 +64,40 @@
   opacity: 70%;
 }
 
+.brick-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0.5em 0em;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.brick-info .info-interact .info-zoom-image {
+  border-radius: 4px;
+  height: 4em;
+  width: 4em;
+  margin: 0 0 0.5em 0;
+  outline: 0.5px solid #1976d2;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+}
+
+.brick-info .info-interact .info-zoom-image .info-zoom-icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  background: radial-gradient(circle, white 0%, rgba(255, 255, 255, 0) 75%, rgba(255, 255, 255, 0) 100%);
+}
+
+.brick-info .info-interact .info-zoom-image:hover {
+  outline: 1px solid #1976d2;
+}
+
 @media only screen and (max-width: 600px) {
   .bingo-container .bingo-brick .bingo-brick-text {
     font-size: 12px;
@@ -73,6 +111,9 @@
   }
   .bingo-container .bingo-brick .bingo-brick-text {
     font-size: 10px;
+  }
+  .brick-info {
+    margin: 0.5em;
   }
 }
 
