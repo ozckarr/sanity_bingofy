@@ -83,12 +83,19 @@ export default function BingoGame() {
     }
   };
 
+  const checkBox = (index) => {
+    let localData = JSON.parse(localStorage.getItem(bingo._id));
+    localData.checkedList[index] = !localData.checkedList[index];
+    localStorage.setItem(bingo._id, JSON.stringify(localData));
+    setLocalBingoData(localData);
+  };
+
   if (!bingo) return <div>Loading...</div>;
 
   return (
     <Container maxWidth="sm">
       <Box sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}>
-        <Link to={"/"}>
+        <Link to={"/"} onClick={() => localStorage.removeItem(bingo._id)}>
           <Button
             variant="outlined"
             size="small"
@@ -102,6 +109,7 @@ export default function BingoGame() {
           {bingo.title}
         </Typography>
       </Box>
+
       <div className="bingo-container">
         {bingo.brick &&
           localBingoData.checkedList !== [] &&
@@ -109,6 +117,7 @@ export default function BingoGame() {
             <BingoBrick
               brick={brick}
               key={index}
+              checkBox={checkBox}
               selectBrick={selectBrick}
               checked={localBingoData.checkedList[index]}
               index={index}
@@ -116,7 +125,11 @@ export default function BingoGame() {
             />
           ))}
       </div>
-      <BingoBrickInfo brick={selectedBrick} />
+      <BingoBrickInfo
+        brick={selectedBrick}
+        checkBox={checkBox}
+        selectedBrickIndex={selectedBrickIndex}
+      />
     </Container>
   );
 }

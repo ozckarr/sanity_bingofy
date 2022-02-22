@@ -15,7 +15,15 @@ function BingoBrick({
   checked,
   index,
   selectedBrickIndex,
+  checkBox,
 }) {
+  const handleClick = () => {
+    if (index === selectedBrickIndex) {
+      checkBox(index);
+    } else {
+      selectBrick(brick, index);
+    }
+  };
   return (
     <>
       {brick.image ? (
@@ -24,7 +32,7 @@ function BingoBrick({
             index === selectedBrickIndex && "bingo-brick-selected"
           }`}
           style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
-          onClick={() => selectBrick(brick, index)}
+          onClick={handleClick}
         >
           {checked ? (
             <div className="bingo-brick-img-fill bingo-brick-img-checked"></div>
@@ -36,8 +44,10 @@ function BingoBrick({
         <div
           className={`bingo-brick ${
             index === selectedBrickIndex && "bingo-brick-selected"
-          }`}
-          onClick={() => selectBrick(brick, index)}
+          }
+          ${checked && "bingo-brick-text-checked"}
+          `}
+          onClick={handleClick}
         >
           <div
             className={`bingo-brick-text-container ${

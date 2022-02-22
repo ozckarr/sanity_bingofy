@@ -16,7 +16,7 @@ function urlFor(source) {
   return builder.image(source);
 }
 
-function BingoBrickInfo({ brick }) {
+function BingoBrickInfo({ brick, selectedBrickIndex, checkBox }) {
   return (
     <>
       {brick === null ? (
@@ -43,7 +43,11 @@ function BingoBrickInfo({ brick }) {
                 />
               </div>
             )}
-            <Button variant="outlined" size="small">
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={() => checkBox(selectedBrickIndex)}
+            >
               <CheckCircleRoundedIcon fontSize="large" />
             </Button>
           </div>
