@@ -64,7 +64,7 @@ export default {
     {
       name: "description",
       title: "Beskrivning",
-      type: "blockContent",
+      type: "string",
     },
   ],
 

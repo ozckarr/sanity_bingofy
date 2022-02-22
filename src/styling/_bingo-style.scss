@@ -4,6 +4,12 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .return-icon {
+    color: #1976d2;
+    border: #1976d2 solid 2px;
+    border-radius: 1em;
+    margin-right: 0.5em;
+  }
 }
 
 .bingo-container {
@@ -17,7 +23,6 @@
     width: 100%;
   }
   .bingo-brick-text-checked {
-    background-image: url("../images/cross-text.png");
     background-size: cover;
   }
   .bingo-brick {
@@ -42,6 +47,7 @@
         transform: translate(-50%, -50%);
         text-align: center;
         width: fit-content;
+        user-select: none;
       }
     }
     .bingo-brick-img-fill {
@@ -49,7 +55,6 @@
       padding-bottom: 100%;
     }
     .bingo-brick-img-checked {
-      background-image: url("../images/cross.png");
       background-size: cover;
       opacity: 70%;
       z-index: 0;

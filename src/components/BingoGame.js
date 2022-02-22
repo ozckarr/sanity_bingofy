@@ -121,13 +121,7 @@ export default function BingoGame() {
           className="bingo-game-header"
         >
           <Link to={"/"} onClick={() => localStorage.removeItem(bingo._id)}>
-            <Button
-              variant="outlined"
-              size="small"
-              sx={{ marginBottom: "0.2em", marginRight: "1em" }}
-            >
-              <KeyboardReturnIcon />
-            </Button>
+            <KeyboardReturnIcon className="return-icon" />
           </Link>
 
           <Typography

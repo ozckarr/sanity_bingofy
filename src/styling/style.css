@@ -4,6 +4,13 @@
   text-overflow: ellipsis;
 }
 
+.bingo-game-header .return-icon {
+  color: #1976d2;
+  border: #1976d2 solid 2px;
+  border-radius: 1em;
+  margin-right: 0.5em;
+}
+
 .bingo-container {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -23,7 +30,6 @@
 }
 
 .bingo-container .bingo-brick-text-checked {
-  background-image: url("../images/cross-text.png");
   background-size: cover;
 }
 
@@ -58,6 +64,10 @@
   width: -webkit-fit-content;
   width: -moz-fit-content;
   width: fit-content;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 .bingo-container .bingo-brick .bingo-brick-img-fill {
@@ -66,7 +76,6 @@
 }
 
 .bingo-container .bingo-brick .bingo-brick-img-checked {
-  background-image: url("../images/cross.png");
   background-size: cover;
   opacity: 70%;
   z-index: 0;
