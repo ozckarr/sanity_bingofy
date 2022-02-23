@@ -14,6 +14,8 @@ import PlayCircleFilled from "@mui/icons-material/PlayCircleFilled";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import Print from "@mui/icons-material/Print";
 
+import Loading from "./Loading";
+
 export default function Post() {
   const [bingoData, setBingoData] = useState(null);
 
@@ -28,6 +30,8 @@ export default function Post() {
       .then((data) => setBingoData(data))
       .catch(console.error);
   }, []);
+
+  if (!bingoData) return <Loading />;
 
   return (
     <Container maxWidth="sm">

@@ -39,22 +39,26 @@ export default function OverLay({
         sx={{ maxWidth: "522px" }}
       >
         <Box className="bingo-overlay-content">
-          <CancelOutlinedIcon
-            color="primary"
-            className="bingo-overlay-close"
-            fontSize="medium"
-          />
+          {!youHaveBingo && (
+            <CancelOutlinedIcon
+              color="primary"
+              className="bingo-overlay-close"
+              fontSize="medium"
+            />
+          )}
           {youHaveBingo ? (
             <Box className="bingo-overlay-win">
               <Typography variant="h3" color="primary">
                 Bingo...
               </Typography>
-              <Button variant="outlined" onClick={handleContinuePlaying}>
-                Fortsätt Spela
-              </Button>
-              <Button variant="outlined" onClick={restart}>
-                Börja Om
-              </Button>
+              <Box className="bingo-overlay-win-buttons">
+                <Button variant="outlined" onClick={handleContinuePlaying}>
+                  Fortsätt Spela
+                </Button>
+                <Button variant="outlined" onClick={restart}>
+                  Börja Om
+                </Button>
+              </Box>
             </Box>
           ) : (
             <div

@@ -6,6 +6,8 @@ import checkForBingo from "../modules/checkForBingo";
 import randomOrder from "../modules/randomOrder";
 
 import BingoBrick from "./BingoBrick";
+import Loading from "./Loading";
+
 import BingoBrickInfo from "./BingoBrickInfo";
 import OverLay from "./OverLay";
 import Typography from "@mui/material/Typography";
@@ -101,7 +103,7 @@ export default function BingoGame() {
     setLocalBingoData({ order, checkedList });
   };
 
-  if (!bingo) return <div>Loading...</div>;
+  if (!bingo) return <Loading />;
 
   return (
     <>

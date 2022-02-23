@@ -57,7 +57,31 @@
     .bingo-brick-img-checked {
       background-size: cover;
       z-index: 0;
-      opacity: 70%;
+    }
+  }
+}
+
+.loading {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .loader {
+    border: 10px solid #f3f3f3; /* Light grey */
+    border-top: 10px solid #1976d2; /* Blue */
+    border-radius: 50%;
+    width: 5em;
+    height: 5em;
+    animation: spin 2s linear infinite;
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
     }
   }
 }
@@ -154,12 +178,19 @@
       .bingo-overlay-win {
         margin: 2em;
         text-align: center;
-        display: flex;
         flex-direction: column;
+        display: flex;
         height: 0;
         padding-bottom: calc(100% - 4em);
-        button {
+        .bingo-overlay-win-buttons {
           margin-top: 0.5em;
+          display: flex;
+          flex-direction: column;
+          margin-top: 2em;
+
+          button {
+            margin-top: 0.5em;
+          }
         }
       }
     }
