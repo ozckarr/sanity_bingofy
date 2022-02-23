@@ -56,7 +56,9 @@ export default function Post() {
                   <Typography
                     variant="h5"
                     component="div"
-                    sx={{ margin: " 0.4em 0.2em 0.2em 0.2em" }}
+                    sx={{
+                      margin: " 0.4em 0.2em 0.2em 0.2em",
+                    }}
                     color="primary"
                   >
                     {bingo.title}
