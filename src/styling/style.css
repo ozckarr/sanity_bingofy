@@ -138,12 +138,6 @@
           justify-content: space-between;
 }
 
-.brick-info .brick-text-title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .brick-info .brick-text-info {
   margin-right: 0.5em;
   width: calc(100% - 72px);
