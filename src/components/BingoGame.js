@@ -20,6 +20,7 @@ export default function BingoGame() {
   const [bingo, setBingo] = useState(null);
   const [youHaveBingo, setYouHaveBingo] = useState(false);
   const [continuePlaying, setContinuePlaying] = useState(false);
+  const [numberOfBoxes, setNumberOfBoxes] = useState(0);
 
   const [selectedBrick, setSelectedBrick] = useState(null);
   const [selectedBrickIndex, setSelectedBrickIndex] = useState(null);
@@ -51,8 +52,21 @@ export default function BingoGame() {
   useEffect(() => {
     if (bingo !== null) {
       let localData = JSON.parse(localStorage.getItem(bingo._id));
+      let boxQuantity;
+      if (bingo.brick.length < 3) {
+        boxQuantity = 1;
+      } else if (bingo.brick.length < 8) {
+        boxQuantity = 4;
+      } else if (bingo.brick.length < 15) {
+        boxQuantity = 9;
+      } else if (bingo.brick.length < 24) {
+        boxQuantity = 16;
+      } else {
+        boxQuantity = 25;
+      }
+      setNumberOfBoxes(boxQuantity);
       if (localData === null) {
-        const checkedList = Array(25).fill(false);
+        const checkedList = Array(boxQuantity).fill(false);
         const order = randomOrder(bingo);
 
         localStorage.setItem(bingo._id, JSON.stringify({ order, checkedList }));
@@ -70,9 +84,19 @@ export default function BingoGame() {
 
   const aNewBrickOrder = () => {
     if (bingo.brick !== null) {
-      let reorderdBricks = Array(25).fill(0);
-      for (let i = 0; i < 25; i++) {
+      let reorderdBricks = Array(bingo.brick.length).fill(0);
+
+      for (let i = 0; i < bingo.brick.length; i++) {
         reorderdBricks[localBingoData.order[i]] = bingo.brick[i];
+      }
+      // Removes leftover boxes
+      reorderdBricks.length = numberOfBoxes;
+      // error catch
+      if (reorderdBricks === undefined) {
+        reorderdBricks = {
+          order: [],
+          checkedList: [],
+        };
       }
       return reorderdBricks;
     }
@@ -83,7 +107,7 @@ export default function BingoGame() {
     localData.checkedList[index] = !localData.checkedList[index];
     localStorage.setItem(bingo._id, JSON.stringify(localData));
     setLocalBingoData(localData);
-    setYouHaveBingo(checkForBingo(localData.checkedList));
+    setYouHaveBingo(checkForBingo(localData.checkedList, numberOfBoxes));
   };
 
   const restart = () => {
@@ -98,7 +122,7 @@ export default function BingoGame() {
     });
 
     const order = randomOrder(bingo);
-    const checkedList = Array(25).fill(false);
+    const checkedList = Array(bingo.brick.length).fill(false);
     localStorage.setItem(bingo._id, JSON.stringify({ order, checkedList }));
     setLocalBingoData({ order, checkedList });
   };
@@ -146,6 +170,7 @@ export default function BingoGame() {
                 checked={localBingoData.checkedList[index]}
                 index={index}
                 selectedBrickIndex={selectedBrickIndex}
+                numberOfBoxes={numberOfBoxes}
               />
             ))}
         </div>

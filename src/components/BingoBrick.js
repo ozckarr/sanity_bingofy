@@ -19,6 +19,7 @@ function BingoBrick({
   index,
   selectedBrickIndex,
   checkBox,
+  numberOfBoxes,
 }) {
   const handleClick = () => {
     if (index === selectedBrickIndex) {
@@ -27,6 +28,21 @@ function BingoBrick({
       selectBrick(brick, index);
     }
   };
+
+  const boxPattern = () => {
+    if (numberOfBoxes === 1) {
+      return "boxPattern-1x1";
+    } else if (numberOfBoxes === 4) {
+      return "boxPattern-2x2";
+    } else if (numberOfBoxes === 9) {
+      return "boxPattern-3x3";
+    } else if (numberOfBoxes === 16) {
+      return "boxPattern-4x4";
+    } else {
+      return "boxPattern-5x5";
+    }
+  };
+
   return (
     <>
       {brick.image ? (
@@ -52,6 +68,8 @@ function BingoBrick({
             index === selectedBrickIndex && "bingo-brick-selected"
           }
           ${checked && "bingo-brick-text-checked"}
+
+          ${boxPattern()}
           `}
           onClick={handleClick}
           style={

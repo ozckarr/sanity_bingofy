@@ -41,6 +41,26 @@
           box-sizing: border-box;
 }
 
+.bingo-container .bingo-brick.boxPattern-1x1 {
+  width: 100%;
+}
+
+.bingo-container .bingo-brick.boxPattern-2x2 {
+  width: 50%;
+}
+
+.bingo-container .bingo-brick.boxPattern-3x3 {
+  width: calc(100% / 3);
+}
+
+.bingo-container .bingo-brick.boxPattern-4x4 {
+  width: 25%;
+}
+
+.bingo-container .bingo-brick.boxPattern-5x5 {
+  width: 20%;
+}
+
 .bingo-container .bingo-brick.bingo-brick-selected {
   border: 3px solid #1976d2;
 }
