@@ -25,12 +25,8 @@ export default function OverLay({
   setViewSettings,
   textView,
   setTextView,
+  setViewPrintOverlay,
 }) {
-  const handleContinuePlaying = () => {
-    setContinuePlaying(true);
-    setViewOverlay(false);
-  };
-
   return (
     <Container
       className="bingo-overlay-container"
@@ -60,10 +56,17 @@ export default function OverLay({
                 Bingo...
               </Typography>
               <Box className="bingo-overlay-win-buttons">
-                <Button variant="outlined" onClick={handleContinuePlaying}>
+                <Button
+                  size="large"
+                  variant="outlined"
+                  onClick={() => {
+                    setContinuePlaying(true);
+                    setViewOverlay(false);
+                  }}
+                >
                   Fortsätt Spela
                 </Button>
-                <Button variant="outlined" onClick={restart}>
+                <Button size="large" variant="outlined" onClick={restart}>
                   Börja Om
                 </Button>
               </Box>
@@ -75,12 +78,21 @@ export default function OverLay({
               </Typography>
               <Box className="bingo-overlay-win-buttons">
                 <Button
+                  size="large"
+                  variant="outlined"
+                  onClick={() => setViewPrintOverlay(true)}
+                >
+                  Skriv ut
+                </Button>
+                <br />
+                <Button
+                  size="large"
                   variant="outlined"
                   onClick={() => setTextView(!textView)}
                 >
                   Textvy: {textView ? "På" : "Av"}
                 </Button>
-                <Button variant="outlined" onClick={restart}>
+                <Button size="large" variant="outlined" onClick={restart}>
                   Börja Om
                 </Button>
               </Box>

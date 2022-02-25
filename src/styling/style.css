@@ -69,7 +69,10 @@
   margin: 0.2em;
   height: 0;
   padding-bottom: calc(100% - 0.4em);
-  word-break: break-all;
+  word-break: break-word;
+  -webkit-hyphens: auto;
+      -ms-hyphens: auto;
+          hyphens: auto;
   overflow: hidden;
   position: relative;
 }
@@ -303,6 +306,10 @@
   margin-top: 0.5em;
 }
 
+.bingo-overlay-container.bingo-printoverlay {
+  background-color: rgba(179, 63, 63, 0.5) !important;
+}
+
 @media only screen and (max-width: 600px) {
   .bingo-container .bingo-brick .bingo-brick-text {
     font-size: 12px;
@@ -310,6 +317,12 @@
   .bingo-overlay-container .bingo-overlay {
     padding: 0 2em;
   }
+}
+
+.bingo-page-container .bingo-pages {
+  width: 21cm;
+  height: 29.7cm;
+  border: solid 1px black;
 }
 
 @media only screen and (max-width: 500px) {

@@ -7,9 +7,10 @@ import randomOrder from "../modules/randomOrder";
 
 import BingoBrick from "./BingoBrick";
 import Loading from "./Loading";
-
 import BingoBrickInfo from "./BingoBrickInfo";
 import OverLay from "./OverLay";
+import PrintOverlay from "./PrintOverlay";
+
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
@@ -27,6 +28,9 @@ export default function BingoGame() {
   const [viewOverlay, setViewOverlay] = useState(false);
 
   const [viewSettings, setViewSettings] = useState(false);
+  const [viewPrintOverlay, setViewPrintOverlay] = useState(false);
+  const [numberOfPages, setNumberOfPages] = useState(0);
+
   const [textView, setTextView] = useState(false);
 
   const [localBingoData, setLocalBingoData] = useState({
@@ -145,9 +149,20 @@ export default function BingoGame() {
           setViewSettings={setViewSettings}
           textView={textView}
           setTextView={setTextView}
+          setViewPrintOverlay={setViewPrintOverlay}
         />
       )}
-      <Container maxWidth="sm">
+      {viewPrintOverlay && (
+        <PrintOverlay
+          setViewPrintOverlay={setViewPrintOverlay}
+          numberOfPages={numberOfPages}
+          setNumberOfPages={setNumberOfPages}
+        />
+      )}
+      <Container
+        maxWidth="sm"
+        style={viewPrintOverlay ? { height: "100vh" } : {}}
+      >
         <Box
           sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}
           className="bingo-game-header"
@@ -191,6 +206,14 @@ export default function BingoGame() {
           checkedList={localBingoData.checkedList}
         />
       </Container>
+      <Box className="bingo-page-container">
+        {viewPrintOverlay &&
+          [...Array(numberOfPages)].map((elementInArray, index) => (
+            <Box className="bingo-pages" key={index}>
+              Snart utskrivningsbart
+            </Box>
+          ))}
+      </Box>
     </>
   );
 }
