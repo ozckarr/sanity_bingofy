@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import sanityClient from "../client";
-import { useParams, Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 import checkForBingo from "../modules/checkForBingo";
 import randomOrder from "../modules/randomOrder";
@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 
-import KeyboardReturnIcon from "@mui/icons-material/KeyboardReturn";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 export default function BingoGame() {
   const [bingo, setBingo] = useState(null);
@@ -25,6 +25,9 @@ export default function BingoGame() {
   const [selectedBrick, setSelectedBrick] = useState(null);
   const [selectedBrickIndex, setSelectedBrickIndex] = useState(null);
   const [viewOverlay, setViewOverlay] = useState(false);
+
+  const [viewSettings, setViewSettings] = useState(false);
+  const [textView, setTextView] = useState(false);
 
   const [localBingoData, setLocalBingoData] = useState({
     order: [],
@@ -131,13 +134,17 @@ export default function BingoGame() {
 
   return (
     <>
-      {(viewOverlay || (youHaveBingo && !continuePlaying)) && (
+      {(viewOverlay || (youHaveBingo && !continuePlaying) || viewSettings) && (
         <OverLay
           selectedBrick={selectedBrick}
           setViewOverlay={setViewOverlay}
           youHaveBingo={youHaveBingo}
           setContinuePlaying={setContinuePlaying}
           restart={restart}
+          viewSettings={viewSettings}
+          setViewSettings={setViewSettings}
+          textView={textView}
+          setTextView={setTextView}
         />
       )}
       <Container maxWidth="sm">
@@ -145,9 +152,10 @@ export default function BingoGame() {
           sx={{ display: "flex", flexDirection: "rows", margin: "0.5em 0" }}
           className="bingo-game-header"
         >
-          <Link to={"/"} onClick={() => localStorage.removeItem(bingo._id)}>
-            <KeyboardReturnIcon className="return-icon" />
-          </Link>
+          <SettingsIcon
+            className="settings-icon"
+            onClick={() => setViewSettings(true)}
+          />
 
           <Typography
             variant={"h5"}
@@ -171,6 +179,7 @@ export default function BingoGame() {
                 index={index}
                 selectedBrickIndex={selectedBrickIndex}
                 numberOfBoxes={numberOfBoxes}
+                textView={textView}
               />
             ))}
         </div>

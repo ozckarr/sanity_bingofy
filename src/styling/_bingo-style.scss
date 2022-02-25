@@ -4,7 +4,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
-  .return-icon {
+  .settings-icon {
     color: #1976d2;
     border: #1976d2 solid 2px;
     border-radius: 1em;
@@ -189,6 +189,24 @@
         background-repeat: no-repeat;
       }
       .bingo-overlay-win {
+        margin: 2em;
+        text-align: center;
+        flex-direction: column;
+        display: flex;
+        height: 0;
+        padding-bottom: calc(100% - 4em);
+        .bingo-overlay-win-buttons {
+          margin-top: 0.5em;
+          display: flex;
+          flex-direction: column;
+          margin-top: 2em;
+
+          button {
+            margin-top: 0.5em;
+          }
+        }
+      }
+      .bingo-overlay-settings {
         margin: 2em;
         text-align: center;
         flex-direction: column;

@@ -21,6 +21,10 @@ export default function OverLay({
   youHaveBingo,
   setContinuePlaying,
   restart,
+  viewSettings,
+  setViewSettings,
+  textView,
+  setTextView,
 }) {
   const handleContinuePlaying = () => {
     setContinuePlaying(true);
@@ -31,7 +35,10 @@ export default function OverLay({
     <Container
       className="bingo-overlay-container"
       sx={{ maxWidth: "100vw" }}
-      onClick={() => setViewOverlay(false)}
+      onClick={() => {
+        setViewOverlay(false);
+        setViewSettings(false);
+      }}
     >
       <Container
         maxWidth="sm"
@@ -46,6 +53,7 @@ export default function OverLay({
               fontSize="medium"
             />
           )}
+
           {youHaveBingo ? (
             <Box className="bingo-overlay-win">
               <Typography variant="h3" color="primary">
@@ -54,6 +62,23 @@ export default function OverLay({
               <Box className="bingo-overlay-win-buttons">
                 <Button variant="outlined" onClick={handleContinuePlaying}>
                   Fortsätt Spela
+                </Button>
+                <Button variant="outlined" onClick={restart}>
+                  Börja Om
+                </Button>
+              </Box>
+            </Box>
+          ) : viewSettings ? (
+            <Box className="bingo-overlay-settings">
+              <Typography variant="h4" color="primary">
+                Inställningar
+              </Typography>
+              <Box className="bingo-overlay-win-buttons">
+                <Button
+                  variant="outlined"
+                  onClick={() => setTextView(!textView)}
+                >
+                  Textvy: {textView ? "På" : "Av"}
                 </Button>
                 <Button variant="outlined" onClick={restart}>
                   Börja Om

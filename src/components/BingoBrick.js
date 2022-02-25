@@ -20,6 +20,7 @@ function BingoBrick({
   selectedBrickIndex,
   checkBox,
   numberOfBoxes,
+  textView,
 }) {
   const handleClick = () => {
     if (index === selectedBrickIndex) {
@@ -42,27 +43,9 @@ function BingoBrick({
       return "boxPattern-5x5";
     }
   };
-
   return (
     <>
-      {brick.image ? (
-        <div
-          className={`bingo-brick bingo-brick-img ${
-            index === selectedBrickIndex && "bingo-brick-selected"
-          }`}
-          style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
-          onClick={handleClick}
-        >
-          {checked ? (
-            <div
-              className="bingo-brick-img-fill bingo-brick-img-checked"
-              style={{ backgroundImage: `url(${cross})` }}
-            ></div>
-          ) : (
-            <div className="bingo-brick-img-fill"></div>
-          )}
-        </div>
-      ) : (
+      {!brick.image || textView ? (
         <div
           className={`bingo-brick ${
             index === selectedBrickIndex && "bingo-brick-selected"
@@ -83,6 +66,23 @@ function BingoBrick({
           >
             <Typography className="bingo-brick-text">{brick.title}</Typography>
           </div>
+        </div>
+      ) : (
+        <div
+          className={`bingo-brick bingo-brick-img ${
+            index === selectedBrickIndex && "bingo-brick-selected"
+          }`}
+          style={{ backgroundImage: `url(${urlFor(brick.image).url()})` }}
+          onClick={handleClick}
+        >
+          {checked ? (
+            <div
+              className="bingo-brick-img-fill bingo-brick-img-checked"
+              style={{ backgroundImage: `url(${cross})` }}
+            ></div>
+          ) : (
+            <div className="bingo-brick-img-fill"></div>
+          )}
         </div>
       )}
     </>

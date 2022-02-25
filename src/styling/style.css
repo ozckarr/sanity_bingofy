@@ -4,7 +4,7 @@
   text-overflow: ellipsis;
 }
 
-.bingo-game-header .return-icon {
+.bingo-game-header .settings-icon {
   color: #1976d2;
   border: #1976d2 solid 2px;
   border-radius: 1em;
@@ -270,6 +270,36 @@
 }
 
 .bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-win .bingo-overlay-win-buttons button {
+  margin-top: 0.5em;
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-settings {
+  margin: 2em;
+  text-align: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 0;
+  padding-bottom: calc(100% - 4em);
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-settings .bingo-overlay-win-buttons {
+  margin-top: 0.5em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-top: 2em;
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-settings .bingo-overlay-win-buttons button {
   margin-top: 0.5em;
 }
 

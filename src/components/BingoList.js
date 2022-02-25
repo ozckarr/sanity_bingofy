@@ -12,7 +12,6 @@ import Box from "@mui/material/Box";
 
 import PlayCircleFilled from "@mui/icons-material/PlayCircleFilled";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
-import Print from "@mui/icons-material/Print";
 
 import Loading from "./Loading";
 
@@ -65,7 +64,13 @@ export default function Post() {
                     }}
                     color="primary"
                   >
-                    {bingo.title}
+                    <Link
+                      to={"/" + bingo.slug.current}
+                      key={bingo.slug.current}
+                      style={{ textDecoration: "none", color: "#1976d2" }}
+                    >
+                      {bingo.title}
+                    </Link>
                   </Typography>
                 </Box>
                 <Box
@@ -74,12 +79,6 @@ export default function Post() {
                     marginTop: "0.5em",
                   }}
                 >
-                  <Print
-                    color="primary"
-                    fontSize="large"
-                    sx={{ marginLeft: "0.2em" }}
-                  />
-
                   {bingo.description && (
                     <PopupState variant="popover" popupId="popup-popover">
                       {(popupState) => (
