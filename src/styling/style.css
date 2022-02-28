@@ -322,7 +322,23 @@
 .bingo-page-container .bingo-pages {
   width: 21cm;
   height: 29.7cm;
+  padding: 2em;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
   border: solid 1px black;
+}
+
+.bingo-page-container .bingo-pages .css-1gde288-MuiContainer-root {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.bingo-page-container .bingo-pages .bingo-container .bingo-brick .bingo-brick-text {
+  font-size: 16px !important;
+}
+
+.bingo-page-container .bingo-pages .bingo-container .bingo-brick .bingo-brick-text.bingo-brick-text-small {
+  font-size: 12px !important;
 }
 
 @media only screen and (max-width: 500px) {

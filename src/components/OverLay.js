@@ -7,6 +7,9 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import LocalPrintshopRoundedIcon from "@mui/icons-material/LocalPrintshopRounded";
+import TextFieldsRoundedIcon from "@mui/icons-material/TextFieldsRounded";
+import RestartAltRoundedIcon from "@mui/icons-material/RestartAltRounded";
 
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -81,6 +84,7 @@ export default function OverLay({
                   size="large"
                   variant="outlined"
                   onClick={() => setViewPrintOverlay(true)}
+                  startIcon={<LocalPrintshopRoundedIcon />}
                 >
                   Skriv ut
                 </Button>
@@ -89,10 +93,16 @@ export default function OverLay({
                   size="large"
                   variant="outlined"
                   onClick={() => setTextView(!textView)}
+                  startIcon={<TextFieldsRoundedIcon />}
                 >
                   Textvy: {textView ? "På" : "Av"}
                 </Button>
-                <Button size="large" variant="outlined" onClick={restart}>
+                <Button
+                  size="large"
+                  variant="outlined"
+                  onClick={restart}
+                  startIcon={<RestartAltRoundedIcon />}
+                >
                   Börja Om
                 </Button>
               </Box>

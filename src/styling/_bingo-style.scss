@@ -252,7 +252,23 @@
   .bingo-pages {
     width: 21cm;
     height: 29.7cm;
+    padding: 2em;
+    box-sizing: border-box;
     border: solid 1px black;
+    .css-1gde288-MuiContainer-root {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
+    .bingo-container {
+      .bingo-brick {
+        .bingo-brick-text {
+          font-size: 16px !important;
+          &.bingo-brick-text-small {
+            font-size: 12px !important;
+          }
+        }
+      }
+    }
   }
 }
 

@@ -5,13 +5,19 @@ import Box from "@mui/material/Box";
 //import Button from "@mui/material/Button";
 //import Typography from "@mui/material/Typography";
 import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
 
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import CheckBoxOutlineBlankOutlinedIcon from "@mui/icons-material/CheckBoxOutlineBlankOutlined";
+import CheckBoxOutlinedIcon from "@mui/icons-material/CheckBoxOutlined";
 
 export default function PrintOverlay({
   setViewPrintOverlay,
   numberOfPages,
   setNumberOfPages,
+  handlePrint,
+  setPrintTwoPerPage,
+  printTwoPerPage,
 }) {
   return (
     <Container
@@ -43,7 +49,23 @@ export default function PrintOverlay({
             onChange={(e) => setNumberOfPages(parseInt(e.target.value))}
             InputProps={{ inputProps: { min: 0 } }}
           />
-          {numberOfPages}
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={() => setPrintTwoPerPage(!printTwoPerPage)}
+            endIcon={
+              !printTwoPerPage ? (
+                <CheckBoxOutlineBlankOutlinedIcon />
+              ) : (
+                <CheckBoxOutlinedIcon />
+              )
+            }
+          >
+            2 bingon per sida
+          </Button>
+          <Button size="large" variant="outlined" onClick={handlePrint}>
+            Skriv ut
+          </Button>
         </Box>
       </Container>
     </Container>

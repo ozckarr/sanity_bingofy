@@ -1,4 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useReactToPrint } from "react-to-print";
+
 import sanityClient from "../client";
 import { useParams } from "react-router-dom";
 
@@ -10,6 +12,7 @@ import Loading from "./Loading";
 import BingoBrickInfo from "./BingoBrickInfo";
 import OverLay from "./OverLay";
 import PrintOverlay from "./PrintOverlay";
+import BingoPageForPrint from "./BingoPageForPrint";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -30,6 +33,7 @@ export default function BingoGame() {
   const [viewSettings, setViewSettings] = useState(false);
   const [viewPrintOverlay, setViewPrintOverlay] = useState(false);
   const [numberOfPages, setNumberOfPages] = useState(0);
+  const [printTwoPerPage, setPrintTwoPerPage] = useState(false);
 
   const [textView, setTextView] = useState(false);
 
@@ -39,6 +43,12 @@ export default function BingoGame() {
   });
 
   const { slug } = useParams();
+
+  // Print out
+  const componentRef = useRef();
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   // Fetch Bingo Data
   useEffect(() => {
@@ -157,6 +167,9 @@ export default function BingoGame() {
           setViewPrintOverlay={setViewPrintOverlay}
           numberOfPages={numberOfPages}
           setNumberOfPages={setNumberOfPages}
+          handlePrint={handlePrint}
+          printTwoPerPage={printTwoPerPage}
+          setPrintTwoPerPage={setPrintTwoPerPage}
         />
       )}
       <Container
@@ -206,11 +219,28 @@ export default function BingoGame() {
           checkedList={localBingoData.checkedList}
         />
       </Container>
-      <Box className="bingo-page-container">
+      <Box className="bingo-page-container" ref={componentRef}>
         {viewPrintOverlay &&
+          bingo &&
           [...Array(numberOfPages)].map((elementInArray, index) => (
             <Box className="bingo-pages" key={index}>
-              Snart utskrivningsbart
+              <BingoPageForPrint
+                bingo={bingo}
+                numberOfBoxes={numberOfBoxes}
+                textView={textView}
+                printTwoPerPage={printTwoPerPage}
+              />
+              {printTwoPerPage && (
+                <>
+                  <Box sx={{ marginTop: "1em" }}></Box>
+                  <BingoPageForPrint
+                    bingo={bingo}
+                    numberOfBoxes={numberOfBoxes}
+                    textView={textView}
+                    printTwoPerPage={printTwoPerPage}
+                  />
+                </>
+              )}
             </Box>
           ))}
       </Box>
