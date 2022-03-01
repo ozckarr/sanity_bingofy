@@ -29,6 +29,7 @@ export default function OverLay({
   textView,
   setTextView,
   setViewPrintOverlay,
+  setLockScreen,
 }) {
   return (
     <Container
@@ -64,6 +65,7 @@ export default function OverLay({
                   variant="outlined"
                   onClick={() => {
                     setContinuePlaying(true);
+                    setLockScreen(true);
                     setViewOverlay(false);
                   }}
                 >

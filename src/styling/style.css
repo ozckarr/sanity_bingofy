@@ -306,8 +306,24 @@
   margin-top: 0.5em;
 }
 
-.bingo-overlay-container.bingo-printoverlay {
-  background-color: rgba(179, 63, 63, 0.5) !important;
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-content-print {
+  margin: 2em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: center;
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-content-print h4 {
+  padding-bottom: 0.5em;
+}
+
+.bingo-overlay-container .bingo-overlay .bingo-overlay-content .bingo-overlay-content-print button {
+  margin: 1em 0 0;
 }
 
 @media only screen and (max-width: 600px) {

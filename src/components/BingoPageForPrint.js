@@ -1,6 +1,4 @@
-import React from "react";
-
-//import randomOrder from "../modules/randomOrder";
+import React, { useState, useEffect } from "react";
 
 import BingoBrickForPrint from "./BingoBrickForPrint";
 
@@ -14,9 +12,22 @@ export default function BingoPageForPrint({
   textView,
   printTwoPerPage,
 }) {
+  const [shuffledBingo, setShuffledBingo] = useState([]);
+
+  useEffect(() => {
+    let newArray = bingo.brick;
+    for (let i = newArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      const temp = newArray[i];
+      newArray[i] = newArray[j];
+      newArray[j] = temp;
+    }
+    setShuffledBingo(newArray);
+  }, [bingo]);
+
   return (
     <>
-      <Container sx={printTwoPerPage && { width: "519px" }}>
+      <Container sx={printTwoPerPage ? { width: "519px" } : { margin: "auto" }}>
         <Box className="bingo-game-header">
           <Typography
             variant={"h5"}
@@ -26,7 +37,7 @@ export default function BingoPageForPrint({
             {bingo.title}
           </Typography>
           <div className="bingo-container">
-            {bingo.brick.map((brick, index) => (
+            {shuffledBingo.map((brick, index) => (
               <BingoBrickForPrint
                 brick={brick}
                 key={index}

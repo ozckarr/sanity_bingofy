@@ -52,6 +52,7 @@ export default function BingoGame() {
 
   // Fetch Bingo Data
   useEffect(() => {
+    // TODO dettatch fetchGame
     sanityClient
       .fetch(
         `*[slug.current == "${slug}"]{
@@ -65,8 +66,23 @@ export default function BingoGame() {
       .catch(console.error);
   }, [slug]);
 
+  const fetchGame = () => {
+    sanityClient
+      .fetch(
+        `*[slug.current == "${slug}"]{
+            title,
+            _id,
+            slug,
+            brick
+          }`
+      )
+      .then((data) => setBingo(data[0]))
+      .catch(console.error);
+  };
+
   // After fetch randomize the game or use the old structure
   useEffect(() => {
+    // TODO module
     if (bingo !== null) {
       let localData = JSON.parse(localStorage.getItem(bingo._id));
       let boxQuantity;
@@ -170,6 +186,7 @@ export default function BingoGame() {
           handlePrint={handlePrint}
           printTwoPerPage={printTwoPerPage}
           setPrintTwoPerPage={setPrintTwoPerPage}
+          fetchGame={fetchGame}
         />
       )}
       <Container
