@@ -1,12 +1,12 @@
-import React, { useRef } from "react";
-import { useReactToPrint } from "react-to-print";
+import React, { useState } from "react";
 import BingoGame from "./BingoGame";
 
 export default function BingoContainer() {
-  const componentRef = useRef();
-  const handlePrint = useReactToPrint({
-    content: () => componentRef.current,
-  });
+  const [lockScreen, setLockScreen] = useState(false);
 
-  return <BingoGame handlePrint={handlePrint} componentRef={componentRef} />;
+  return (
+    <div className={`${lockScreen ? "lock-screen" : ""}`}>
+      <BingoGame setLockScreen={setLockScreen} />
+    </div>
+  );
 }

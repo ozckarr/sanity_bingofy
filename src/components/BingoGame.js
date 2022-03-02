@@ -12,7 +12,7 @@ import Loading from "./Loading";
 import BingoBrickInfo from "./BingoBrickInfo";
 import OverLay from "./OverLay";
 import PrintOverlay from "./PrintOverlay";
-import BingoPageForPrint from "./BingoPageForPrint";
+import BingoPrintControl from "./BingoPrintControl";
 
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
@@ -20,7 +20,7 @@ import Box from "@mui/material/Box";
 
 import SettingsIcon from "@mui/icons-material/Settings";
 
-export default function BingoGame() {
+export default function BingoGame({ setLockScreen }) {
   const [bingo, setBingo] = useState(null);
   const [youHaveBingo, setYouHaveBingo] = useState(false);
   const [continuePlaying, setContinuePlaying] = useState(false);
@@ -65,6 +65,14 @@ export default function BingoGame() {
       .then((data) => setBingo(data[0]))
       .catch(console.error);
   }, [slug]);
+
+  useEffect(() => {
+    if (numberOfPages !== 0) {
+      setLockScreen(true);
+    } else {
+      setLockScreen(false);
+    }
+  }, [numberOfPages, setLockScreen]);
 
   const fetchGame = () => {
     sanityClient
@@ -237,29 +245,14 @@ export default function BingoGame() {
         />
       </Container>
       <Box className="bingo-page-container" ref={componentRef}>
-        {viewPrintOverlay &&
-          bingo &&
-          [...Array(numberOfPages)].map((elementInArray, index) => (
-            <Box className="bingo-pages" key={index}>
-              <BingoPageForPrint
-                bingo={bingo}
-                numberOfBoxes={numberOfBoxes}
-                textView={textView}
-                printTwoPerPage={printTwoPerPage}
-              />
-              {printTwoPerPage && (
-                <>
-                  <Box sx={{ marginTop: "1em" }}></Box>
-                  <BingoPageForPrint
-                    bingo={bingo}
-                    numberOfBoxes={numberOfBoxes}
-                    textView={textView}
-                    printTwoPerPage={printTwoPerPage}
-                  />
-                </>
-              )}
-            </Box>
-          ))}
+        <BingoPrintControl
+          bingo={bingo}
+          viewPrintOverlay={viewPrintOverlay}
+          numberOfPages={numberOfPages}
+          numberOfBoxes={numberOfBoxes}
+          textView={textView}
+          printTwoPerPage={printTwoPerPage}
+        />
       </Box>
     </>
   );

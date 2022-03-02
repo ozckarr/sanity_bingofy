@@ -378,4 +378,9 @@
     font-size: 9px;
   }
 }
+
+.lock-screen {
+  height: 100vh;
+  overflow: hidden;
+}
 /*# sourceMappingURL=style.css.map */

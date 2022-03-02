@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import BingoBrickForPrint from "./BingoBrickForPrint";
 
@@ -11,19 +11,27 @@ export default function BingoPageForPrint({
   numberOfBoxes,
   textView,
   printTwoPerPage,
+  bingoPattern,
 }) {
-  const [shuffledBingo, setShuffledBingo] = useState([]);
+  const aNewBrickOrder = () => {
+    if (bingo.brick !== null) {
+      let reorderdBricks = Array(bingo.brick.length).fill(0);
 
-  useEffect(() => {
-    let newArray = bingo.brick;
-    for (let i = newArray.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      const temp = newArray[i];
-      newArray[i] = newArray[j];
-      newArray[j] = temp;
+      for (let i = 0; i < bingo.brick.length; i++) {
+        reorderdBricks[bingoPattern[i]] = bingo.brick[i];
+      }
+      // Removes leftover boxes
+      reorderdBricks.length = numberOfBoxes;
+      // error catch
+      if (reorderdBricks === undefined) {
+        reorderdBricks = {
+          order: [],
+          checkedList: [],
+        };
+      }
+      return reorderdBricks;
     }
-    setShuffledBingo(newArray);
-  }, [bingo]);
+  };
 
   return (
     <>
@@ -37,7 +45,7 @@ export default function BingoPageForPrint({
             {bingo.title}
           </Typography>
           <div className="bingo-container">
-            {shuffledBingo.map((brick, index) => (
+            {aNewBrickOrder().map((brick, index) => (
               <BingoBrickForPrint
                 brick={brick}
                 key={index}
